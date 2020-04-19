@@ -1,0 +1,30 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Fraud Classification</title>
+</head>
+<body>
+
+<h1>Fraud Classification Model</h1>
+
+<h3>Please enter in the data as text in JSON format. Examples entries are shown below</h3>
+
+{% from "_formhelpers.html" import render_field%}
+
+<form method=post action="/results">
+    <dl>
+        {{ render_field(form.json_string, rows='25', cols='50') }}
+    </dl>
+    <div>
+        <input type="submit" value="Get Prediction", name="'submit_button">
+    </div>
+</form>
+
+<h4>Good:</h4>
+{{ good_json }}
+<h4>Fraud:</h4>
+{{ fraud_json }}
+
+</body>
+</html>

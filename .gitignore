@@ -1,4 +1,4 @@
 *.pkl
-data/
+*.csv
 .idea/
 __pycache__/
