@@ -9,7 +9,7 @@ import numpy as np
 
 # helper functions  -------
 def load_model():
-    fraud_model = pickle.load(open('pkl_objects/adasyn.pkl', 'rb'))
+    fraud_model = pickle.load(open('pkl_objects/model.pkl', 'rb'))
     return fraud_model
 
 

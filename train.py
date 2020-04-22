@@ -2,8 +2,8 @@
 
 
 from sklearn.model_selection import train_test_split
-from sklearn.ensemble import ExtraTreesClassifier
-from imblearn.over_sampling import ADASYN
+from sklearn.ensemble import RandomForestClassifier
+from imblearn.over_sampling import SMOTE
 import pandas as pd
 import pickle
 
@@ -12,29 +12,23 @@ def main():
     # read in data
     data = pd.read_csv("data/creditcard.csv")
 
-    # split out training data
+    _RANDOM_STATE_ = 0
     X_train, X_test, y_train, y_test = train_test_split(data.drop('Class', axis=1),
                                                         data['Class'],
                                                         test_size=0.2,
-                                                        random_state=123
+                                                        random_state=_RANDOM_STATE_
                                                         )
 
-    # run adasyn on train set
-    adasyn = ADASYN(random_state=123)
-    X_adasyn, y_adasyn = adasyn.fit_resample(X_train, y_train)
-    print(X_adasyn.shape, y_adasyn.shape)
+    # build out SMOTE Data set
+    sm = SMOTE(random_state=_RANDOM_STATE_)
+    X_smote, y_smote = sm.fit_resample(X_train, y_train)
 
     # initialize and fit the the model
-    forest_adasyn = ExtraTreesClassifier(
-        n_estimators=500,
-        max_depth=6,
-        criterion='gini',
-        random_state=123
-    )
+    rand_forest_smote = RandomForestClassifier(random_state=_RANDOM_STATE_)
 
-    forest_adasyn.fit(X_adasyn, y_adasyn)
+    rand_forest_smote.fit(X_smote, y_smote)
 
-    pickle.dump(forest_adasyn, open('pkl_objects/adasyn.pkl', 'wb'), protocol=4)
+    pickle.dump(rand_forest_smote, open('pkl_objects/model.pkl', 'wb'), protocol=4)
     print("Done")
 
     return
