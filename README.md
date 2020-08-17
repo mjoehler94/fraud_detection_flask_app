@@ -8,7 +8,7 @@
 
 ___
 
-This project my capstone project for the Udacity Machine Learning Engineering Nanodegree
+This project was my capstone project for the Udacity Machine Learning Engineering Nanodegree
 
 **A Quick Guide for navigating this repository**
 
